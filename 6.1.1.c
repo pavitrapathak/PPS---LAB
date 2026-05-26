@@ -1,0 +1,48 @@
+# Input
+day = int(input())
+month = int(input())
+year = int(input())
+
+valid = True
+
+# Check valid year and month
+if year <= 0 or month < 1 or month > 12:
+    valid = False
+
+# Function to check leap year
+def is_leap(y):
+    return (y % 400 == 0) or (y % 4 == 0 and y % 100 != 0)
+
+# Days in months
+if valid:
+    if month in [1,3,5,7,8,10,12]:
+        max_day = 31
+    elif month in [4,6,9,11]:
+        max_day = 30
+    elif month == 2:
+        if is_leap(year):
+            max_day = 29
+        else:
+            max_day = 28
+
+    if day < 1 or day > max_day:
+        valid = False
+
+# If invalid date
+if not valid:
+    print("Invalid Date")
+
+else:
+    # Increment date
+    day += 1
+
+    if day > max_day:
+        day = 1
+        month += 1
+
+        if month > 12:
+            month = 1
+            year += 1
+
+    # Print in DD-MM-YYYY format
+    print(f"{day:02d}-{month:02d}-{year}") 
